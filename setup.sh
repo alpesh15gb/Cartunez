@@ -85,7 +85,13 @@ if [ ! -f "src/app/etc/env.php" ]; then
         --currency="USD" \
         --timezone="America/New_York" \
         --use-rewrites=1 \
-        --backend-frontname="admin"'
+        --backend-frontname="admin" \
+        --search-engine="opensearch" \
+        --opensearch-host="search" \
+        --opensearch-port="9200" \
+        --opensearch-index-prefix="cartunez" \
+        --opensearch-enable-auth="0" \
+        --opensearch-timeout="15"'
 else
     echo "[INFO] env.php found, skipping setup:install."
 fi
