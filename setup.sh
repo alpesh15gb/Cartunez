@@ -112,6 +112,9 @@ fi
 
 # 6. Setup & Upgrade
 echo "[ACTION] Running Magento Setup & Upgrade..."
+# Clean caches that might hold stale LESS files
+docker compose run --rm app rm -rf var/view_preprocessed pub/static/frontend var/cache var/page_cache generated/code
+
 docker compose run --rm app bin/magento setup:upgrade
 docker compose run --rm app bin/magento setup:di:compile
 echo "[ACTION] Deploying Static Content..."
