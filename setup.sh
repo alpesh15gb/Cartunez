@@ -68,6 +68,14 @@ fi
 
 # 5. Database Installation (if needed)
 if [ ! -f "src/app/etc/env.php" ]; then
+    echo "[ACTION] Waiting for OpenSearch to be ready..."
+    # Loop until OpenSearch responds
+    until docker compose exec -T search curl -s http://localhost:9200/_cluster/health > /dev/null; do
+        echo "Waiting for OpenSearch..."
+        sleep 5
+    done
+    echo "[INFO] OpenSearch is ready!"
+
     echo "[ACTION] Running Magento Initial Installation (setup:install)..."
     # We use sh -c to access the container's environment variables
     docker compose run --rm app sh -c 'bin/magento setup:install \
