@@ -33,7 +33,8 @@ RUN docker-php-ext-install \
     soap \
     sockets \
     xsl \
-    zip
+    zip \
+    ftp
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
