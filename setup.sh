@@ -87,7 +87,7 @@ if [ ! -f "src/app/etc/env.php" ]; then
     # We use sh -c to access the container's environment variables
     docker compose run --rm app sh -c 'bin/magento setup:install \
         --cleanup-database \
-        --base-url="http://localhost:8082/" \
+        --base-url="http://cartunez.in/" \
         --db-host="db" \
         --db-name="$DB_NAME" \
         --db-user="$DB_USER" \
