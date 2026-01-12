@@ -102,12 +102,14 @@ if [ ! -f "src/app/etc/env.php" ]; then
         --opensearch-timeout="15"'
 else
     echo "[INFO] env.php found, forcing OpenSearch configuration..."
-    docker compose run --rm app bin/magento setup:config:set \
-        --opensearch-host="search" \
-        --opensearch-port="9200" \
-        --opensearch-index-prefix="cartunez" \
-        --opensearch-enable-auth="0" \
-        --opensearch-timeout="15"
+    docker compose run --rm app sh -c 'bin/magento config:set catalog/search/engine opensearch && \
+        bin/magento config:set catalog/search/opensearch_server_hostname search && \
+        bin/magento config:set catalog/search/opensearch_server_port 9200 && \
+        bin/magento config:set catalog/search/opensearch_index_prefix cartunez && \
+        bin/magento config:set catalog/search/opensearch_enable_auth 0 && \
+        bin/magento config:set catalog/search/opensearch_server_timeout 15 && \
+        bin/magento config:set catalog/search/elasticsearch7_server_hostname search && \
+        bin/magento config:set catalog/search/elasticsearch7_server_port 9200'
 fi
 
 # 6. Setup & Upgrade
